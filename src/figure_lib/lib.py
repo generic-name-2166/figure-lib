@@ -1,17 +1,16 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 import math
-from collections.abc import Sequence
-from typing import Optional
+from typing import Optional, Any
 
 
 class Figure(ABC):
     @abstractmethod
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         pass
 
     @abstractmethod
-    def get_area(self):
+    def get_area(self) -> Any:
         pass
 
 
@@ -25,11 +24,10 @@ class Circle(Figure):
 
 @dataclass(slots=True)
 class Triangle(Figure):
-    sides: Sequence[float, float, float]
+    sides: tuple[float, float, float]
     is_right: bool = field(default=False, init=False)
 
     def __post_init__(self):
-        self.sides = tuple(self.sides)
         self.is_right = (
             sum(side**2 for side in self.sides) == (max(self.sides) ** 2) * 2
         )

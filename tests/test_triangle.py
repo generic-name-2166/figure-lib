@@ -4,8 +4,11 @@ from figure_lib.lib import Triangle
 def test_triangle():
     triangle = Triangle((1, 1, 1))
     assert triangle.sides == (1, 1, 1)
-    assert triangle == Triangle([1, 1, 1])
-    assert round(triangle.get_area(), 3) == 0.433
+    assert triangle == Triangle((1, 1, 1))
+
+    area = triangle.get_area()
+    assert area is not None
+    assert round(area, 3) == 0.433
     assert triangle.is_right is not None
 
 
